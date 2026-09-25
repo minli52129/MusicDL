@@ -1,0 +1,56 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install host tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y autoconf libtool nasm yasm pkg-config xz-utils
+
+      - name: Build ffmpeg arm64-v8a
+        run: bash scripts/build-ffmpeg.sh arm64-v8a
+        continue-on-error: true
+
+      - name: Build ffmpeg armeabi-v7a
+        run: bash scripts/build-ffmpeg.sh armeabi-v7a
+        continue-on-error: true
+
+      - name: Build ffmpeg x86_64
+        run: bash scripts/build-ffmpeg.sh x86_64
+        continue-on-error: true
+
+      - name: Check ffmpeg results
+        run: |
+          chmod -R a+rX app/src/main/jniLibs || true
+          find app/src/main/jniLibs -type f -exec ls -la {} \; || true
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.11.1"
+
+      - name: Assemble debug APK
+        run: gradle assembleDebug --no-daemon --stacktrace
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MusicDL-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

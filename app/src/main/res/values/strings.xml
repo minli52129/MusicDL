@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MusicDL</string>
+    <string name="tab_search">搜索</string>
+    <string name="tab_downloads">下载</string>
+    <string name="tab_settings">设置</string>
+    <string name="search_hint">关键词或粘贴视频链接</string>
+    <string name="search_go">搜索</string>
+    <string name="search_empty">没有找到结果</string>
+    <string name="download">下载</string>
+    <string name="cancel">取消</string>
+    <string name="retry">重试</string>
+    <string name="delete">删除</string>
+    <string name="play">播放</string>
+    <string name="pick_format">选择音频格式</string>
+    <string name="no_downloads">暂无下载任务</string>
+    <string name="status_queued">排队中…</string>
+    <string name="status_done">已完成</string>
+    <string name="status_failed">失败</string>
+    <string name="status_cancelled">已取消</string>
+    <string name="settings_output">输出</string>
+    <string name="settings_copy_music">下载完成后复制到系统音乐库</string>
+    <string name="settings_env">运行环境</string>
+    <string name="env_ok">已集成（可转码 MP3/AAC/Opus）</string>
+    <string name="env_missing">未找到（仅支持原始 M4A 流）</string>
+    <string name="settings_dir">保存目录：%1$s</string>
+    <string name="settings_disclaimer">说明：请仅下载你有权保存的内容，并遵守 YouTube 服务条款与当地法律。本应用仅供个人学习与技术研究。</string>
+    <string name="notif_channel">下载任务</string>
+    <string name="notif_downloading">%1$d 个下载进行中</string>
+</resources>
