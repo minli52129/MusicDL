@@ -5,6 +5,7 @@
 set -euo pipefail
 
 ABI="${1:?usage: $0 <abi>}"
+REPO_ROOT="$(pwd)"
 API=24
 NDK="${ANDROID_NDK_LATEST_HOME:-${ANDROID_NDK_HOME:?NDK env not found}}"
 TOOLCHAIN="$NDK/toolchains/llvm/prebuilt/linux-x86_64"
@@ -102,7 +103,7 @@ dl https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz
   --pkg-config=pkg-config && \
   make -j"$JOBS" && make install)
 
-OUT="app/src/main/jniLibs/$ABI"
+OUT="$REPO_ROOT/app/src/main/jniLibs/$ABI"
 mkdir -p "$OUT"
 cp "$PREFIX/bin/ffmpeg" "$OUT/libffmpeg.so"
 cp "$PREFIX/bin/ffprobe" "$OUT/libffprobe.so"
