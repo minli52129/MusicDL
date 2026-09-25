@@ -391,7 +391,7 @@ private fun SettingsScreen(repo: DownloadRepository) {
                                 },
                                 enabled = enabled,
                                 onClick = {
-                                    settings.setDefaultFormat(fmt)
+                                    settings.updateDefaultFormat(fmt)
                                     fmtMenu = false
                                 },
                             )
@@ -403,7 +403,7 @@ private fun SettingsScreen(repo: DownloadRepository) {
                     Text(stringResource(R.string.settings_copy_music), Modifier.weight(1f))
                     Switch(
                         checked = settings.copyToMusic,
-                        onCheckedChange = { settings.setCopyToMusic(it) },
+                        onCheckedChange = { settings.updateCopyToMusic(it) },
                     )
                 }
             }

@@ -18,12 +18,12 @@ class Settings(context: Context) {
         return runCatching { AudioFormat.valueOf(name) }.getOrDefault(AudioFormat.M4A_ORIGINAL)
     }
 
-    fun setDefaultFormat(f: AudioFormat) {
+    fun updateDefaultFormat(f: AudioFormat) {
         defaultFormat = f
         prefs.edit().putString("default_format", f.name).apply()
     }
 
-    fun setCopyToMusic(v: Boolean) {
+    fun updateCopyToMusic(v: Boolean) {
         copyToMusic = v
         prefs.edit().putBoolean("copy_to_music", v).apply()
     }

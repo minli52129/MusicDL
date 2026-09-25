@@ -100,7 +100,7 @@ dl https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz
   --extra-libs="-lmp3lame -lopus -lm" \
   --pkg-config-flags=--static \
   --pkg-config=pkg-config && \
-  make -j"$JOBS" && make install)"
+  make -j"$JOBS" && make install)
 
 OUT="app/src/main/jniLibs/$ABI"
 mkdir -p "$OUT"
