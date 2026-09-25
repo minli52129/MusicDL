@@ -17,9 +17,7 @@ class App : Application() {
 
     companion object {
         lateinit var settings: Settings
-            private set
         lateinit var repository: DownloadRepository
-            private set
 
         fun init(context: Context) {
             if (::settings.isInitialized) return
