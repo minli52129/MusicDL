@@ -27,6 +27,10 @@ ARCH_FLAGS="${ARCH_FLAGS:-}"
 export PATH="$TOOLCHAIN/bin:$PATH"
 CC="$TRIP$API-clang"
 CXX="$TRIP$API-clang++"
+# NDK >= r26 ships only llvm-* binutils; provide prefixed names for configure/libtool
+for t in ar as nm ranlib strip objcopy readelf; do
+  ln -sf "$TOOLCHAIN/bin/llvm-$t" "$TOOLCHAIN/bin/$TRIP-$t"
+done
 mkdir -p "$PREFIX" "$BUILD"
 cd "$BUILD"
 
@@ -49,6 +53,21 @@ dl https://download.sourceforge.net/lame/lame-3.100.tar.gz
   --enable-static --disable-shared --disable-frontend --disable-analyzer-hooks \
   --disable-gtktest CC="$CC" CXX="$CXX" RANLIB="$TRIP-ranlib" \
   CFLAGS="-O2 -fPIC $ARCH_FLAGS" && make -j"$JOBS" && make install)
+
+# lame does not ship a pkg-config file; ffmpeg requires one
+mkdir -p "$PREFIX/lib/pkgconfig"
+cat > "$PREFIX/lib/pkgconfig/mp3lame.pc" <<PCEOF
+prefix=$PREFIX
+libdir=\${prefix}/lib
+includedir=\${prefix}/include
+
+Name: mp3lame
+Description: MP3 audio encoder
+Version: 3.100.0
+Cflags: -I\${includedir} -I\${includedir}/lame
+Libs: -L\${libdir} -lmp3lame -lm
+PCEOF
+export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
 
 echo "==> opus"
 dl https://archive.xiph.org/src/opus/opus-1.5.2.tar.gz

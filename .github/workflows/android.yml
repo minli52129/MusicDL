@@ -24,10 +24,6 @@ jobs:
         run: bash scripts/build-ffmpeg.sh arm64-v8a
         continue-on-error: true
 
-      - name: Build ffmpeg armeabi-v7a
-        run: bash scripts/build-ffmpeg.sh armeabi-v7a
-        continue-on-error: true
-
       - name: Build ffmpeg x86_64
         run: bash scripts/build-ffmpeg.sh x86_64
         continue-on-error: true
