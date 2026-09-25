@@ -11,7 +11,7 @@ object MediaStoreImport {
         if (android.os.Build.VERSION.SDK_INT < 29) return null
         val resolver = context.contentResolver
         val mime = when (file.extension.lowercase()) {
-            "mp3" -> android.media.MediaMetadataRetriever.MIMETYPE_AUDIO_MPEG
+            "mp3" -> "audio/mpeg"
             "m4a", "mp4" -> "audio/mp4"
             "opus", "ogg" -> "audio/ogg"
             else -> "audio/*"

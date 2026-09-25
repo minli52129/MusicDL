@@ -70,7 +70,7 @@ PCEOF
 export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
 
 echo "==> opus"
-dl https://archive.xiph.org/src/opus/opus-1.5.2.tar.gz
+dl https://github.com/xiph/opus/releases/download/v1.5.2/opus-1.5.2.tar.gz
 (cd opus-1.5.2 && ./configure \
   --host="$TRIP" --prefix="$PREFIX" \
   --enable-static --disable-shared --disable-doc --disable-extra-programs \
